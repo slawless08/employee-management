@@ -16,7 +16,7 @@ create table role (
     department_id INT NOT NULL
 
     PRIMARY KEY id,
-    FOREIGN KEY (department_id) references department(id)
+    FOREIGN KEY (department_id) references departments(id)
 );
 
 create table employee (
@@ -30,3 +30,5 @@ create table employee (
     FOREIGN KEY (role_id) references role(id),
     FOREIGN KEY (manager_id) references role(id)
 );
+
+Error Code: 1824. Failed to open the referenced table 'department'
