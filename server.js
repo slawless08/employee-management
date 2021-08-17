@@ -1,6 +1,9 @@
 const express = require("express");
 const mysql = require("mysql");
 const inquirer = require("inquirer");
+const init = require('./js/index');
+require("dotenv").config();
+const cTable = require('console.table');
 
 const app = express();
 
@@ -21,5 +24,6 @@ const db = mysql.createConnection(
 
 app.listen( PORT, () => {
     console.log(`Now listening on port ${PORT}.`)
+    init();
 });
 

@@ -1,16 +1,40 @@
-const mysql = require("mysql");
-const inquirer = require("inquirer");
+const init = () => {
 
-const db_username = process.env.DB_USER;
-const db_password = process.env.DB_PASSWORD;
-const db_name = process.env.DB_NAME;
+    const mysql = require("mysql");
+    const inquirer = require("inquirer");
+    const cTable = require('console.table');
 
-const db = mysql.createConnection(
-    {
-    host: 'localhost',
-    user: db_username,
-    password: db_password,
-    database: db_name
-    },
-    console.log(`Connected to database: ${db_name}`)
-);
+    const viewData = require('./view_data');
+
+    const main = () => {
+        inquirer
+            .prompt(
+                [
+                    {
+                        type: 'list',
+                        name: 'menu',
+                        message: 'How can I help you?',
+                        choices: [
+                            "View employess, departments or roles", "Add department, role, or employee", "Update employee role",
+                        ],
+                    },
+                ],
+            ).then((answer) => {
+                switch (answer.menu) {
+                    case "View employess, departments or roles":
+                        viewData();
+                        break;
+                    case "Add department, role, or employee":
+                        addData();
+                        break;
+                    case "Update employee role":
+                        updateRole();
+                        break;
+                }
+            })
+    };
+
+    main();
+};
+
+module.exports = init;
