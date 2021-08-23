@@ -5,6 +5,8 @@ const init = () => {
     const cTable = require('console.table');
 
     const viewData = require('./view_data');
+    const addData = require('./add_data');
+    const addEmployee = require('./add_data');
 
     const main = () => {
         inquirer
