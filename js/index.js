@@ -6,9 +6,7 @@ const init = () => {
 
     const viewData = require('./view_data');
     const addData = require('./add_data');
-    // const addEmployee = require('./add_data');
-    // const addDepartment = require('./add_data');
-    // const addRole = require('./add_data');
+    const updateRole = require('./update_role')
 
     const main = () => {
         inquirer
