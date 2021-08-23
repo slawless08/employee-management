@@ -30,5 +30,3 @@ create table employee (
     FOREIGN KEY (role_id) references role(id),
     FOREIGN KEY (manager_id) references role(id)
 );
-
-Error Code: 1824. Failed to open the referenced table 'department'
