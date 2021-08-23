@@ -16,41 +16,46 @@ const db = mysql.createConnection(
 
 const cTable = require('console.table');
 
-const updateRole= () => {
+const init = require('./index');
+
+const updateRole = () => {
     inquirer
-    .prompt([
-        {
-            type:'input',
-            name:'employeeID',
-            message:'Enter the employee ID of the employee you would like to update.'
-        },
-        {
-            type:'input',
-            name:'updateFirst',
-            message:'First name?'
-        },
-        {
-            type:'input',
-            name:'updateLast',
-            message:'Last name?'
-        },
-        {
-            type:'input',
-            name:'updateRoleID',
-            message:'Role id?'
-        },
-        {
-            type:'input',
-            name:'updateManagerID',
-            message:'Manager id?'
-        }
-        
-    ]).then((answers) => {
-        db.query(`UPDATE employee SET first_name = "${answers.updateFirst}", last_name = "${answers.updateLast}", role_id = "${answers.updateRoleID}", manager_id = "${answers.updateManagerID}" WHERE id = "${answers.employeeID}";`);
-        db.query("SELECT * FROM employee", (err,results) => {
-            console.table(results);
+        .prompt([
+            {
+                type: 'input',
+                name: 'employeeID',
+                message: 'Enter the employee ID of the employee you would like to update.'
+            },
+            {
+                type: 'input',
+                name: 'updateFirst',
+                message: 'First name?'
+            },
+            {
+                type: 'input',
+                name: 'updateLast',
+                message: 'Last name?'
+            },
+            {
+                type: 'input',
+                name: 'updateRoleID',
+                message: 'Role id?'
+            },
+            {
+                type: 'input',
+                name: 'updateManagerID',
+                message: 'Manager id?'
+            }
+
+        ]).then((answers) => {
+            db.query(`UPDATE employee SET first_name = "${answers.updateFirst}", last_name = "${answers.updateLast}", role_id = "${answers.updateRoleID}", manager_id = "${answers.updateManagerID}" WHERE id = "${answers.employeeID}";`);
+            db.query("SELECT * FROM employee", (err, results) => {
+                console.table(results);
+                console.log("Press any arrow key to continue.");
+
+            })
+            init();
         })
-    })
 };
 
 module.exports = updateRole;

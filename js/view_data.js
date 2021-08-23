@@ -1,4 +1,8 @@
+const init = require('./index');
+
 const viewData = () => {
+
+    const askMain = require('./index');
 
     const inquirer = require("inquirer");
 
@@ -46,19 +50,29 @@ const viewData = () => {
     const viewEmployees = () => {
         db.query("SELECT * FROM employee;", (err, results) => {
             console.table(results);
+            console.log("Press any arrow key to continue.");
         });
+        init();
     };
 
     const viewDepartments = () => {
         db.query("SELECT * FROM departments;", (err, results) => {
             console.table(results);
+            console.log("Press any arrow key to continue.");
+
         });
+        console.log("Press enter to continue.");
+        init();
     };
 
     const viewRoles = () => {
         db.query("SELECT * FROM role;", (err, results) => {
             console.table(results);
+            console.log("Press any arrow key to continue.");
+
         });
+        console.log("Press enter to continue.");
+        init();
     };
 
 };

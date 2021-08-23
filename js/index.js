@@ -1,3 +1,6 @@
+const inquirer = require("inquirer");
+
+
 const init = () => {
 
     const mysql = require("mysql");
@@ -17,7 +20,7 @@ const init = () => {
                         name: 'menu',
                         message: 'How can I help you?',
                         choices: [
-                            "View employess, departments or roles", "Add department, role, or employee", "Update employee role",
+                            "View employess, departments or roles", "Add department, role, or employee", "Update employee role", "Exit"
                         ],
                     },
                 ],
@@ -31,6 +34,9 @@ const init = () => {
                         break;
                     case "Update employee role":
                         updateRole();
+                        break;
+                    case "Exit":
+                        console.log("Thank you for using this application!");
                         break;
                 }
             })

@@ -16,6 +16,8 @@ const db = mysql.createConnection(
 
 const cTable = require('console.table');
 
+const init = require('./index');
+
 const addData = () => {
 
     inquirer
@@ -42,79 +44,92 @@ const addData = () => {
             }
         });
 
-        const addEmployee = () => {
-            inquirer
-                .prompt([
-                    {
-                        type: 'input',
-                        name: 'firstName',
-                        message: 'First name?',
-                    },
-                    {
-                        type: 'input',
-                        name: 'lastName',
-                        message: 'Last name?',
-                    },
-                    {
-                        type: 'input',
-                        name: 'roleId',
-                        message: 'Role id?',
-                    },
-                    {
-                        type: 'input',
-                        name: 'managerId',
-                        message: 'Manager id?',
-                    }
-                ]).then((answers) => {
-                    db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) values ("${answers.firstName}", "${answers.lastName}", "${answers.roleId}", "${answers.managerId}");`);
-                    db.query(`SELECT * FROM employee`, (err, results) => {
-                        console.table(results);
-                    });
-                })
-        };
-
-        const addDepartment = () => {
-            inquirer
+    const addEmployee = () => {
+        inquirer
             .prompt([
                 {
                     type: 'input',
-                    name:'deptName',
-                    message:'Department name?'
+                    name: 'firstName',
+                    message: 'First name?',
+                },
+                {
+                    type: 'input',
+                    name: 'lastName',
+                    message: 'Last name?',
+                },
+                {
+                    type: 'input',
+                    name: 'roleId',
+                    message: 'Role id?',
+                },
+                {
+                    type: 'input',
+                    name: 'managerId',
+                    message: 'Manager id?',
+                }
+            ]).then((answers) => {
+                db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) values ("${answers.firstName}", "${answers.lastName}", "${answers.roleId}", "${answers.managerId}");`);
+                db.query(`SELECT * FROM employee`, (err, results) => {
+                    console.table(results);
+                    console.log("Press any arrow key to continue.");
+
+                });
+                init();
+
+            })
+    };
+
+    const addDepartment = () => {
+        inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'deptName',
+                    message: 'Department name?'
                 }
             ]).then((answers) => {
                 db.query(`INSERT INTO departments (department_name) values ("${answers.deptName}");`);
-                db.query('SELECT * FROM departments', (err,results) => {
+                db.query('SELECT * FROM departments', (err, results) => {
                     console.table(results);
-                })
-            });
-        };
+                    console.log("Press any arrow key to continue.");
 
-        const addRole = () => {
-            inquirer
+                })
+                init();
+
+            });
+    };
+
+    const addRole = () => {
+        inquirer
             .prompt([
                 {
-                    type:'input',
-                    name:'title',
-                    message:'Role title?'
+                    type: 'input',
+                    name: 'title',
+                    message: 'Role title?'
                 },
                 {
-                    type:'input',
-                    name:'salary',
-                    message:'Salary?'
+                    type: 'input',
+                    name: 'salary',
+                    message: 'Salary?'
                 },
                 {
-                    type:'input',
-                    name:'deptID',
-                    message:'Department id?'
+                    type: 'input',
+                    name: 'deptID',
+                    message: 'Department id?'
                 }
-        
+
             ]).then((answers) => {
                 db.query(`INSERT INTO role (title, salary, department_id) values ("${answers.title}", "${answers.salary}","${answers.deptID}");`);
-                db.query("SELECT * FROM role", (err,results) => {
+                db.query("SELECT * FROM role", (err, results) => {
                     console.table(results);
+                    console.log("Press any arrow key to continue.");
+
                 })
+                init();
+
+
             });
-        };
+    };
 };
 
 
